@@ -89,7 +89,7 @@ function Developer(props) {
   return (
     <div className="border-2 border-amber-400 p-4  text-2xl">
       <h3>
-        Name: <span className="font-semibold">{props.name}</span>{" "}
+        Name: <span className="font-semibold">{props.name}</span>
       </h3>
       <h3>Technology: {props.tech} </h3>
     </div>
