@@ -10,6 +10,18 @@ function App() {
     { id:4, name: "Sunny Leon", age: 45 }
   ];
 
+  const handleClick=()=>{
+    alert("button Clicked")
+  }
+
+  function handleEvents(){
+    alert("button 2 clicked")
+  }
+  const parameterButton=(num)=>{
+    const result = num+10;
+    alert(result);
+  }
+
   return (
     <>
       <h1 className="font-bold text-4xl text-center w-10/12 mx-auto pt-10">
@@ -79,6 +91,17 @@ function App() {
             <Actors key={actor.id} actor={actor}></Actors>
           ))}
         </section>
+
+        <div>
+          {/* function call kora jabe nah.. declare korte hobe */}
+          <button className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl" onClick={handleClick}>Click Btn-1</button>
+
+
+          <button className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl" onClick={handleEvents}>Click Btn-2</button>
+
+
+          <button onClick={()=>parameterButton(10)} className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl">Click Btn-3</button>
+        </div>
       </section>
     </>
   );
