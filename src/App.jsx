@@ -1,27 +1,41 @@
-import { act } from "react";
+import { act, Suspense } from "react";
 import "./App.css";
 import Person from "./Person";
 import Actors from "./Actors";
 import Batsman from "./Batsman";
+import Users from "./Users";
+import Posts from "./Posts";
+
+const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users").then(
+  (response) => response.json()
+);
+
+const fetchPost = async()=>{
+const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+return response.json();
+}
+
 function App() {
+
+  const postPromise = fetchPost();
   const actors = [
-    { id:1, name: "Sharukh Khan", age: 58 },
-    { id:2, name: "Salman Khan", age: 60 },
-    { id:3, name: "Virat Koholi", age: 40 },
-    { id:4, name: "Sunny Leon", age: 45 }
+    { id: 1, name: "Sharukh Khan", age: 58 },
+    { id: 2, name: "Salman Khan", age: 60 },
+    { id: 3, name: "Virat Koholi", age: 40 },
+    { id: 4, name: "Sunny Leon", age: 45 },
   ];
 
-  const handleClick=()=>{
-    alert("button Clicked")
-  }
+  const handleClick = () => {
+    alert("button Clicked");
+  };
 
-  function handleEvents(){
-    alert("button 2 clicked")
+  function handleEvents() {
+    alert("button 2 clicked");
   }
-  const parameterButton=(num)=>{
-    const result = num+10;
+  const parameterButton = (num) => {
+    const result = num + 10;
     alert(result);
-  }
+  };
 
   return (
     <>
@@ -95,13 +109,26 @@ function App() {
 
         <div>
           {/* function call kora jabe nah.. declare korte hobe */}
-          <button className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl" onClick={handleClick}>Click Btn-1</button>
+          <button
+            className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl"
+            onClick={handleClick}
+          >
+            Click Btn-1
+          </button>
 
+          <button
+            className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl"
+            onClick={handleEvents}
+          >
+            Click Btn-2
+          </button>
 
-          <button className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl" onClick={handleEvents}>Click Btn-2</button>
-
-
-          <button onClick={()=>parameterButton(10)} className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl">Click Btn-3</button>
+          <button
+            onClick={() => parameterButton(10)}
+            className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl"
+          >
+            Click Btn-3
+          </button>
         </div>
 
         <div>
@@ -109,15 +136,45 @@ function App() {
           <Batsman name={"Tamim Iqbal Khan"}></Batsman>
           <Batsman name={"Virat Koholi"}></Batsman>
         </div>
+
+        {/* Data fetching */}
+<h3 className="text-center font-semibold text-xl border-2 border-amber-700 p-5 bg-white rounded-2xl">Data fetching from API..............
+  <br />
+  jokhn async and await diye data fetch kora hoy tokhn react e just 1 ta step beshi korte hoy..
+  <br />
+  karon:- jokhn fetch kora hoy tokhn fetch ta ke directly ekta variable e strore kora hoy.
+  <br />
+  but jokhn async await diye kora hoy.. async ekta function.. tai data fetch kore shei functiont a ke just ekta variable e call korte hoy and shei function ta components er moddhe props hishebe use korte hoy
+</h3>
+        <div>
+          <Suspense
+            fallback={
+              <div>
+                <span className="loading loading-bars loading-xs"></span>
+                <span className="loading loading-bars loading-sm"></span>
+                <span className="loading loading-bars loading-md"></span>
+                <span className="loading loading-bars loading-lg"></span>
+                <span className="loading loading-bars loading-xl"></span>
+              </div>
+            }
+          >
+            <Users fetchUsers={fetchUsers}></Users>
+          </Suspense>
+        </div>
+
+            <div>
+              <Suspense>
+                <Posts postPromise={postPromise}></Posts>
+              </Suspense>
+            </div>
+
       </section>
-
-
     </>
   );
 }
 
 function Developer(props) {
-  console.log(props);
+  /* console.log(props); */
   return (
     <div className="border-2 border-amber-400 p-4  text-2xl">
       <h3>
