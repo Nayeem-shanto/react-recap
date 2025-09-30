@@ -2,6 +2,7 @@ import { act } from "react";
 import "./App.css";
 import Person from "./Person";
 import Actors from "./Actors";
+import Batsman from "./Batsman";
 function App() {
   const actors = [
     { id:1, name: "Sharukh Khan", age: 58 },
@@ -102,7 +103,15 @@ function App() {
 
           <button onClick={()=>parameterButton(10)} className="border-2 border-amber-900 bg-yellow-50 mr-2 p-2 rounded-2xl font-semibold text-xl">Click Btn-3</button>
         </div>
+
+        <div>
+          <Batsman name={"Sakib Al Hasan"}></Batsman>
+          <Batsman name={"Tamim Iqbal Khan"}></Batsman>
+          <Batsman name={"Virat Koholi"}></Batsman>
+        </div>
       </section>
+
+
     </>
   );
 }
